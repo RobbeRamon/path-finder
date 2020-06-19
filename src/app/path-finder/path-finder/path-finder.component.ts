@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Node } from "../node.model";
 
 @Component({
   selector: "app-path-finder",
@@ -6,10 +7,10 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./path-finder.component.scss"],
 })
 export class PathFinderComponent implements OnInit {
-  public cells: number[][];
+  public nodes: Node[];
 
   constructor() {
-    this.cells = [];
+    this.nodes = [];
   }
 
   ngOnInit(): void {
@@ -17,12 +18,12 @@ export class PathFinderComponent implements OnInit {
   }
 
   drawGrid() {
-    for (let row = 0; row < 15; row++) {
-      const currentRow = [];
-      for (let col = 0; col < 50; col++) {
-        currentRow.push(-1);
-      }
-      this.cells.push(currentRow);
+    for (let i = 0; i < 1000; i++) {
+      this.nodes.push(new Node(i));
     }
+  }
+
+  cellClicked(id: number) {
+    this.nodes[id].value = 1;
   }
 }

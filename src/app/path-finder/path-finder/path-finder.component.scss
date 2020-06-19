@@ -1,4 +1,17 @@
-.row {
-  display: flex;
-  justify-content: space-between;
+mat-grid-tile {
+  background: lightblue;
+
+  &:hover {
+    background: rgb(91, 173, 255);
+    cursor: crosshair;
+  }
+}
+
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

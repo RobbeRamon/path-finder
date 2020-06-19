@@ -1,3 +1,9 @@
-<div *ngFor="let row of cells" class="row">
-  <app-node *ngFor="let cell of row"></app-node>
-</div>
+<mat-grid-list cols="50" rowHeight="1:1">
+  <mat-grid-tile
+    *ngFor="let node of nodes"
+    id="node{{ node.id }}"
+    (click)="cellClicked(node.id)"
+    class="unselectable"
+    >{{ node.value }}</mat-grid-tile
+  >
+</mat-grid-list>
