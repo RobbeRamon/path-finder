@@ -3,8 +3,9 @@
     *ngFor="let node of nodes"
     id="node{{ node.id }}"
     (mousedown)="cellClicked(node.id, $event)"
-    (mouseup)="cellUnClicked()"
+    (mouseup)="cellUnClicked(node.id)"
     (mouseenter)="cellEntered(node.id)"
+    (mouseleave)="cellLeft(node.id)"
     class="unselectable {{ node.purposeString }}"
     ><mat-icon *ngIf="node.purpose == 1">arrow_forward_ios</mat-icon
     ><mat-icon *ngIf="node.purpose == 2"
