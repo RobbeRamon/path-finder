@@ -2,6 +2,7 @@ import { Binary } from "@angular/compiler";
 
 export interface BinaryHeapElement {
   priority: number;
+  id: number;
 }
 
 export class MinHeap {
@@ -13,9 +14,21 @@ export class MinHeap {
     return this._content.length < 1;
   }
 
+  get length() {
+    return this._content.length;
+  }
+
   push(element: BinaryHeapElement) {
-    this._content.push(element);
-    this.bubbleUp(this._content.length - 1);
+    // get the index from the element in de array
+    let index: number = this._content.findIndex((el) => el.id === element.id);
+
+    // check if element exists in array
+    if (index >= 0) {
+      this._content[index] = element;
+    } else {
+      this._content.push(element);
+      this.bubbleUp(this._content.length - 1);
+    }
   }
 
   pop(): BinaryHeapElement {

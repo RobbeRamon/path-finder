@@ -1,7 +1,7 @@
 import { Node } from "../models/node.model";
 import { MinHeap } from "../models/minheap.model";
 
-export function dijkstra(grid: Node[], startNode: Node, endNode: Node) {
+export async function dijkstra(grid: Node[], startNode: Node, endNode: Node) {
   let currentNode: Node = startNode;
   let unvisitedNeighbors: Node[];
   let heap: MinHeap = new MinHeap();
@@ -18,8 +18,22 @@ export function dijkstra(grid: Node[], startNode: Node, endNode: Node) {
   }
 
   while (!heap.empty) {
-    let node: Node = heap.pop() as Node;
+    // sleep to make it visual
+    await sleep(1);
+
+    let node: Node; //= heap.pop() as Node;
+
+    node = heap.pop() as Node;
     node.visited = true;
+
+    currentNode = node;
+    unvisitedNeighbors = getUnvisitedNeighbors(currentNode, grid);
+    changeDistances(unvisitedNeighbors, currentNode);
+    // fill heap with new nodes
+    for (let node of unvisitedNeighbors) {
+      heap.push(node);
+    }
+    console.log(heap.length);
   }
   //}
 }
@@ -38,6 +52,11 @@ function getUnvisitedNeighbors(node: Node, grid: Node[]): Node[] {
 
 function changeDistances(nodes: Node[], currentNode: Node) {
   for (let node of nodes) {
-    node.distance = currentNode.distance + 1;
+    if (node.distance === -1 || node.distance > currentNode.distance + 1)
+      node.distance = currentNode.distance + 1;
   }
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
