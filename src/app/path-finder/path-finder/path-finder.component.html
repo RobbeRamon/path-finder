@@ -2,8 +2,13 @@
   <mat-grid-tile
     *ngFor="let node of nodes"
     id="node{{ node.id }}"
-    (click)="cellClicked(node.id)"
-    class="unselectable"
-    >{{ node.value }}</mat-grid-tile
+    (mousedown)="cellClicked(node.id, $event)"
+    (mouseup)="cellUnClicked()"
+    (mouseenter)="cellEntered(node.id)"
+    class="unselectable {{ node.purposeString }}"
+    ><mat-icon *ngIf="node.purpose == 1">arrow_forward_ios</mat-icon
+    ><mat-icon *ngIf="node.purpose == 2"
+      >radio_button_checked</mat-icon
+    ></mat-grid-tile
   >
 </mat-grid-list>

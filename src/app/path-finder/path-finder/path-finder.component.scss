@@ -1,10 +1,21 @@
-mat-grid-tile {
-  background: lightblue;
-
+mat-grid-list {
+  margin: 10px;
   &:hover {
-    background: rgb(91, 173, 255);
     cursor: crosshair;
   }
+}
+
+mat-grid-tile {
+  background: lightblue;
+  color: rgb(0, 56, 75);
+
+  &:hover {
+    background: rgb(100, 100, 100);
+  }
+}
+
+.wall {
+  background: rgb(100, 100, 100);
 }
 
 .unselectable {
