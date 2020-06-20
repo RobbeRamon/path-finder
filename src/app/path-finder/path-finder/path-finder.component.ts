@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Node } from "../../models/node.model";
+import { dijkstra } from "src/app/algorithms/dijkstra";
 
 @Component({
   selector: "app-path-finder",
@@ -18,6 +19,16 @@ export class PathFinderComponent implements OnInit {
 
   ngOnInit(): void {
     this.drawGrid();
+  }
+
+  get startNode(): Node {
+    // find node with purpose 1 (start)
+    return this.nodes.filter((node) => node.purpose == 1)[0];
+  }
+
+  get endNode(): Node {
+    // find node with purpose 2 (end)
+    return this.nodes.filter((node) => node.purpose == 2)[0];
   }
 
   drawGrid() {
@@ -85,6 +96,10 @@ export class PathFinderComponent implements OnInit {
     if (this._grab > 0 && this._drag) {
       this.nodes[id].purpose = 0;
     }
+  }
+
+  performDijkstra() {
+    dijkstra(this.nodes, this.startNode, this.endNode);
   }
 
   private isChangePossible(id: number) {

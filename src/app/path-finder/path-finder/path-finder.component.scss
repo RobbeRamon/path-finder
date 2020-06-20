@@ -21,6 +21,10 @@ mat-grid-tile {
   }
 }
 
+.visited {
+  background: rgb(0, 155, 207);
+}
+
 .unselectable {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
