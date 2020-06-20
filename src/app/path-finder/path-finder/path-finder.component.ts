@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Node } from "../node.model";
+import { Node } from "../../models/node.model";
 
 @Component({
   selector: "app-path-finder",
