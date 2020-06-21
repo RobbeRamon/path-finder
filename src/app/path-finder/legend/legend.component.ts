@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 
 @Component({
-  selector: 'app-legend',
-  templateUrl: './legend.component.html',
-  styleUrls: ['./legend.component.scss']
+  selector: "app-legend",
+  templateUrl: "./legend.component.html",
+  styleUrls: ["./legend.component.scss"],
 })
 export class LegendComponent implements OnInit {
+  @Output() public perform: EventEmitter<boolean> = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  performDijkstra() {
+    this.perform.emit(true);
   }
-
 }

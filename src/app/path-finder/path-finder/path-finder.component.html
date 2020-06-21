@@ -1,4 +1,4 @@
-<app-legend></app-legend>
+<app-legend (perform)="performDijkstra()"></app-legend>
 <mat-grid-list cols="50" rowHeight="1:1">
   <mat-grid-tile *ngFor="let node of nodes" id="node{{ node.id }}" (mousedown)="cellClicked(node.id, $event)"
     (mouseup)="cellUnClicked(node.id)" (mouseenter)="cellEntered(node.id)" (mouseleave)="cellLeft(node.id)" class="unselectable {{ node.purposeString }} {{
@@ -10,6 +10,3 @@
     <mat-icon *ngIf="node.purpose == 2">radio_button_checked</mat-icon>
   </mat-grid-tile>
 </mat-grid-list>
-<button mat-raised-button color="primary" (click)="performDijkstra()">
-  Dijkstra
-</button>

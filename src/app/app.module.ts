@@ -8,9 +8,10 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MaterialModule } from "./material/material.module";
 import { MdboostrapModule } from "./mdboostrap/mdboostrap.module";
 import { NavigationComponent } from "./navigation/navigation.component";
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
-  declarations: [AppComponent, NavigationComponent],
+  declarations: [AppComponent, NavigationComponent, FooterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
