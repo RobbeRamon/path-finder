@@ -8,14 +8,13 @@ import { dijkstra } from "src/app/algorithms/dijkstra";
   styleUrls: ["./path-finder.component.scss"],
 })
 export class PathFinderComponent implements OnInit {
-  public nodes: Node[];
+  public nodes: Node[] = [];
   private _drag: boolean = false;
   private _normalizeNodes: boolean = false;
   private _grab: number = -1;
+  private _running: boolean = false;
 
-  constructor() {
-    this.nodes = [];
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.drawGrid();
@@ -30,6 +29,12 @@ export class PathFinderComponent implements OnInit {
   }
 
   drawGrid() {
+    // make grid empty
+    this.nodes = [];
+
+    // undo running if necessary
+    this._running = false;
+
     for (let i = 0; i < 1000; i++) {
       let node: Node = new Node(i);
 
@@ -46,6 +51,8 @@ export class PathFinderComponent implements OnInit {
   }
 
   cellClicked(id: number, event) {
+    if (this._running) return;
+
     let node: Node = this.nodes[id];
 
     if (!this.isChangePossible(id)) {
@@ -97,6 +104,7 @@ export class PathFinderComponent implements OnInit {
   }
 
   performDijkstra() {
+    this._running = true;
     dijkstra(this.nodes, this.startNode, this.endNode);
   }
 

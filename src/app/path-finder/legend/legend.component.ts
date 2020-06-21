@@ -7,6 +7,7 @@ import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 })
 export class LegendComponent implements OnInit {
   @Output() public perform: EventEmitter<boolean> = new EventEmitter();
+  @Output() public reset: EventEmitter<boolean> = new EventEmitter();
 
   constructor() {}
 
@@ -14,5 +15,9 @@ export class LegendComponent implements OnInit {
 
   performDijkstra() {
     this.perform.emit(true);
+  }
+
+  resetGrid() {
+    this.reset.emit(true);
   }
 }
