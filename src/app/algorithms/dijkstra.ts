@@ -18,7 +18,7 @@ export async function dijkstra(grid: Node[], startNode: Node, endNode: Node) {
 
   while (!heap.empty && currentNode.id !== endNode.id) {
     // sleep to make steps visual
-    await sleep(0.2);
+    await sleep(0.1);
 
     let node: Node;
 
