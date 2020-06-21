@@ -6,24 +6,25 @@ import {
   WavesModule,
   ButtonsModule,
   CollapseModule,
+  IconsModule,
 } from "angular-bootstrap-md";
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    MDBBootstrapModule.forRoot(),
     NavbarModule,
     WavesModule.forRoot(),
     ButtonsModule.forRoot(),
     CollapseModule.forRoot(),
+    IconsModule,
   ],
   exports: [
-    MDBBootstrapModule,
     NavbarModule,
     WavesModule,
     ButtonsModule,
     CollapseModule,
+    IconsModule,
   ],
 })
 export class MdboostrapModule {}
