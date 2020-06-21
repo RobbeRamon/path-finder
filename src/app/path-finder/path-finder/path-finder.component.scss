@@ -1,13 +1,14 @@
 mat-grid-list {
-  margin: 10px;
   &:hover {
     cursor: crosshair;
   }
+  background: lightblue;
 }
 
 mat-grid-tile {
   background: lightblue;
   color: #0c3547;
+  border: 1px solid white;
 }
 
 .wall {
@@ -23,10 +24,12 @@ mat-grid-tile {
 
 .visited {
   background: rgb(0, 155, 207);
+  animation: fadeIn ease 0.5s;
 }
 
 .path {
   background: #34eb6e;
+  animation: createBox 0.25s;
 }
 
 .unselectable {
@@ -36,4 +39,23 @@ mat-grid-tile {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+// animations
+@keyframes createBox {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
