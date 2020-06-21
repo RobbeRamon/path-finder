@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Node } from "../../models/node.model";
+import { Node, NodePurpose } from "../../models/node.model";
 import { dijkstra } from "src/app/algorithms/dijkstra";
 
 @Component({
@@ -22,13 +22,11 @@ export class PathFinderComponent implements OnInit {
   }
 
   get startNode(): Node {
-    // find node with purpose 1 (start)
-    return this.nodes.find((node) => node.purpose == 1);
+    return this.nodes.find((node) => node.purpose === NodePurpose.Start);
   }
 
   get endNode(): Node {
-    // find node with purpose 2 (end)
-    return this.nodes.find((node) => node.purpose == 2);
+    return this.nodes.find((node) => node.purpose === NodePurpose.End);
   }
 
   drawGrid() {
@@ -36,11 +34,11 @@ export class PathFinderComponent implements OnInit {
       let node: Node = new Node(i);
 
       if (i == 461) {
-        // start node
-        node.purpose = 1;
+        // set start node
+        node.purpose = NodePurpose.Start;
       } else if (i == 489) {
-        // end node
-        node.purpose = 2;
+        // set end node
+        node.purpose = NodePurpose.End;
       }
 
       this.nodes.push(node);
@@ -53,15 +51,15 @@ export class PathFinderComponent implements OnInit {
     if (!this.isChangePossible(id)) {
       this._drag = true;
       this._grab = node.purpose;
-      node.purpose = 0;
+      node.purpose = NodePurpose.Default;
     } else {
       this._drag = true;
 
       if (event.shiftKey) {
-        node.purpose = 0;
+        node.purpose = NodePurpose.Default;
         this._normalizeNodes = true;
       } else {
-        node.purpose = 3;
+        node.purpose = NodePurpose.Wall;
       }
     }
   }
@@ -83,18 +81,18 @@ export class PathFinderComponent implements OnInit {
 
     if (this._drag) {
       if (this._normalizeNodes) {
-        node.purpose = 0;
+        node.purpose = NodePurpose.Default;
       } else if (this._grab > 0) {
         node.purpose = this._grab;
       } else {
-        node.purpose = 3;
+        node.purpose = NodePurpose.Wall;
       }
     }
   }
 
   cellLeft(id: number) {
     if (this._grab > 0 && this._drag) {
-      this.nodes[id].purpose = 0;
+      this.nodes[id].purpose = NodePurpose.Default;
     }
   }
 
@@ -103,6 +101,9 @@ export class PathFinderComponent implements OnInit {
   }
 
   private isChangePossible(id: number) {
-    return this.nodes[id].purpose !== 1 && this.nodes[id].purpose !== 2;
+    return (
+      this.nodes[id].purpose !== NodePurpose.Start &&
+      this.nodes[id].purpose !== NodePurpose.End
+    );
   }
 }
