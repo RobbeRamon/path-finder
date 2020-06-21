@@ -23,12 +23,12 @@ export class PathFinderComponent implements OnInit {
 
   get startNode(): Node {
     // find node with purpose 1 (start)
-    return this.nodes.filter((node) => node.purpose == 1)[0];
+    return this.nodes.find((node) => node.purpose == 1);
   }
 
   get endNode(): Node {
     // find node with purpose 2 (end)
-    return this.nodes.filter((node) => node.purpose == 2)[0];
+    return this.nodes.find((node) => node.purpose == 2);
   }
 
   drawGrid() {

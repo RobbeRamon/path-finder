@@ -1,17 +1,19 @@
 import { BinaryHeapElement } from "./minheap.model";
 
-enum NodePurpose {
+export enum NodePurpose {
   Default,
   Start,
   End,
   Wall,
+  Path,
 }
 
 export class Node implements BinaryHeapElement {
   public distance: number = -1;
   public weight: number = 1;
   public purpose: NodePurpose = NodePurpose.Default;
-  public visited: boolean = false;
+  public finalized: boolean = false;
+  public lastNode: Node;
 
   constructor(public id: number) {}
 
@@ -25,6 +27,8 @@ export class Node implements BinaryHeapElement {
         return "end";
       case 3:
         return "wall";
+      case 4:
+        return "path";
     }
   }
 
