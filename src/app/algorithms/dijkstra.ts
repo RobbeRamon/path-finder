@@ -66,7 +66,7 @@ async function showPath(endNode: Node) {
   // sleep to make steps visual
   await sleep(1);
 
-  lastNode.purpose = NodePurpose.Path;
+  lastNode.path = true;
   lastNode = lastNode.lastNode;
   if (lastNode !== null) showPath(lastNode);
 }

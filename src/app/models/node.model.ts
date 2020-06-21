@@ -5,7 +5,6 @@ export enum NodePurpose {
   Start,
   End,
   Wall,
-  Path,
 }
 
 export class Node implements BinaryHeapElement {
@@ -14,6 +13,7 @@ export class Node implements BinaryHeapElement {
   public purpose: NodePurpose = NodePurpose.Default;
   public finalized: boolean = false;
   public lastNode: Node;
+  public path: boolean;
 
   constructor(public id: number) {}
 
@@ -27,8 +27,6 @@ export class Node implements BinaryHeapElement {
         return "end";
       case 3:
         return "wall";
-      case 4:
-        return "path";
     }
   }
 
