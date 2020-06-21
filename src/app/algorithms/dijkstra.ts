@@ -5,14 +5,13 @@ export async function dijkstra(grid: Node[], startNode: Node, endNode: Node) {
   let currentNode: Node = startNode;
   let unvisitedNeighbors: Node[];
   let heap: MinHeap = new MinHeap();
-  let lastNode: Node;
 
   currentNode.distance = 0;
 
   unvisitedNeighbors = getUnvisitedNeighbors(currentNode, grid);
   changeDistances(unvisitedNeighbors, currentNode);
 
-  // fill heap with new nodes
+  // fill heap with first surrounding nodes
   for (let node of unvisitedNeighbors) {
     heap.push(node);
   }
@@ -21,18 +20,15 @@ export async function dijkstra(grid: Node[], startNode: Node, endNode: Node) {
     // sleep to make steps visual
     await sleep(0.2);
 
-    let node: Node; //= heap.pop() as Node;
-    debugger;
+    let node: Node;
 
     node = heap.pop() as Node;
     node.finalized = true;
 
-    lastNode = currentNode;
     currentNode = node;
-    //currentNode.lastNode = lastNode;
     unvisitedNeighbors = getUnvisitedNeighbors(currentNode, grid);
     changeDistances(unvisitedNeighbors, currentNode);
-    // fill heap with new nodes
+    // fill heap with new surrounding nodes
     for (let node of unvisitedNeighbors) {
       heap.push(node);
     }
@@ -66,7 +62,10 @@ function changeDistances(nodes: Node[], currentNode: Node) {
 
 async function showPath(endNode: Node) {
   let lastNode: Node = endNode;
+
+  // sleep to make steps visual
   await sleep(1);
+
   lastNode.purpose = NodePurpose.Path;
   lastNode = lastNode.lastNode;
   if (lastNode !== null) showPath(lastNode);
