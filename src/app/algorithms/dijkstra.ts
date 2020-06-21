@@ -22,6 +22,7 @@ export async function dijkstra(grid: Node[], startNode: Node, endNode: Node) {
     await sleep(0.2);
 
     let node: Node; //= heap.pop() as Node;
+    debugger;
 
     node = heap.pop() as Node;
     node.finalized = true;
@@ -49,7 +50,9 @@ function getUnvisitedNeighbors(node: Node, grid: Node[]): Node[] {
   if (id - 50 >= 0) nodes.push(grid[id - 50]); // NOT high-most node
   if (id + 50 < 999) nodes.push(grid[id + 50]); // NOT low-most node
 
-  return nodes.filter((node) => node.finalized !== true);
+  return nodes.filter(
+    (node) => node.finalized !== true && node.purpose !== NodePurpose.Wall
+  );
 }
 
 function changeDistances(nodes: Node[], currentNode: Node) {
